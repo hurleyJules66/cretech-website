@@ -11,12 +11,10 @@
 ## 📋 About This Project
 This is the **official website** for **Cretech Systems Limited**, a security and technology solutions company based in Nairobi, Kenya.
 
-**I built this website from scratch using HTML, CSS, and JavaScript** — no templates, no website builders, 100% custom code.
-
 ## 👨‍💻 Developer Credit
 | | |
 |---|---|
-| **Developed by** | ** Racheal Muthoni & Hurley Jules** |
+| **Developed by** | **Racheal Muthoni & Hurley Jules** |
 | **For** | Cretech Systems Limited |
 | **Technologies** | HTML5, CSS3, JavaScript (Vanilla JS) |
 | **Year** | 2026 |
@@ -36,7 +34,7 @@ This is the **official website** for **Cretech Systems Limited**, a security and
 - Government & Embassies | Hospitals & Schools
 - Hotels, Malls & Public Spaces | Transport Hubs
 
-## ✨ Website Features (Built by Me)
+## ✨ Website Features 
 - ✅ Fully responsive design (works on phones, tablets, desktops)
 - ✅ Interactive contact form with email integration (Formspree)
 - ✅ Google Maps integration showing Westlands location
@@ -48,13 +46,6 @@ This is the **official website** for **Cretech Systems Limited**, a security and
 - ✅ Smooth navigation with hash routing
 - ✅ Modern glassmorphism design with animations
 
-## 📞 Company Contact
-| | |
-|---|---|
-| **Location** | Westlands, Nairobi, Kenya |
-| **Phone** | +254 724 083 199 |
-| **Email** | info.creationstechsolutions254@gmail.com |
-| **WhatsApp** | [Chat on WhatsApp](https://wa.me/254724083199) |
 
 ## 🛠️ Technical Stack
 | Technology | Purpose |
@@ -72,21 +63,5 @@ This website is hosted on **GitHub Pages**.
 
 **Live URL:** https://hurleyjules66.github.io/cretech-website/#home
 
-To update the site:
-1. Edit the `index.html` file
-2. Commit changes to the repository
-3. GitHub Pages automatically redeploys (takes 1-2 minutes)
-
 ## 📄 License
 © 2026 Cretech Systems Limited. All rights reserved.
-
----
-
-## ⭐ About the Developer
-**Hurley Jules** - Web Developer
-
-This project showcases my ability to build a complete, professional business website using only HTML, CSS, and JavaScript with no external dependencies (except icons/fonts).
-
----
-
-⭐ Star this repository if you like the project!
