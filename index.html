@@ -470,13 +470,6 @@
             transform: scale(1.05);
         }
         
-        .service-price {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: #3B82F6;
-            margin: 10px 0;
-        }
-        
         .service-tag {
             position: absolute;
             top: 12px;
@@ -881,7 +874,11 @@
         }
         .cart-item-info { flex: 1; }
         .cart-item-name { font-weight: 600; font-size: 0.95rem; }
-        .cart-item-price { color: #3B82F6; font-weight: 700; }
+        .cart-item-price { 
+            color: #6B7280; 
+            font-weight: 500; 
+            font-size: 0.85rem;
+        }
         .cart-item-qty {
             display: flex;
             align-items: center;
@@ -903,10 +900,11 @@
             margin-top: 20px;
             padding-top: 20px;
             border-top: 2px solid #F1F5F9;
-            font-size: 1.3rem;
-            font-weight: 700;
+            font-size: 1.1rem;
+            font-weight: 600;
             display: flex;
             justify-content: space-between;
+            color: #6B7280;
         }
         .cart-empty {
             text-align: center;
@@ -1020,19 +1018,18 @@
     </div>
     <div id="cartFooter" style="display:none;">
         <div class="cart-total">
-            <span>Total:</span>
-            <span id="cartTotal">KES 0</span>
+            <span>Total Items:</span>
+            <span id="cartTotal">0</span>
         </div>
         <div class="cart-actions">
             <button class="btn-danger" id="clearCart" style="flex:0.4;">Clear</button>
-            <button class="btn-success" id="checkoutBtn" style="flex:0.6;"><i class="fas fa-whatsapp"></i> Checkout</button>
+            <button class="btn-success" id="checkoutBtn" style="flex:0.6;"><i class="fas fa-whatsapp"></i> Inquire Now</button>
         </div>
     </div>
 </div>
 
 <footer>
     <div class="container">
-        <!-- Updated Social Links -->
         <div class="social-links">
             <a href="https://www.facebook.com/share/1CzJatLrLb/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
             <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
@@ -1077,7 +1074,6 @@
             desc: "High-security retractable bollards for vehicle control and perimeter protection.", 
             icon: "fas fa-city",
             image: "images/images.jpg",
-            price: 85000,
             tag: "Popular"
         },
         { 
@@ -1085,7 +1081,6 @@
             desc: "Advanced CCTV systems and surveillance room setups for monitoring critical areas.", 
             icon: "fas fa-video",
             image: "images/images1.jpg",
-            price: 65000,
             tag: "Best Seller"
         },
         { 
@@ -1093,7 +1088,6 @@
             desc: "Secure pedestrian access with full-height turnstiles and modern access control systems.", 
             icon: "fas fa-door-open",
             image: "images/images2.jpg",
-            price: 45000,
             tag: null
         },
         { 
@@ -1101,7 +1095,6 @@
             desc: "Automated door locks integrated with smart systems for offices, homes, and industrial facilities.", 
             icon: "fas fa-lock",
             image: "images/images3.jpg",
-            price: 35000,
             tag: "New"
         },
         { 
@@ -1109,7 +1102,6 @@
             desc: "Reliable network infrastructure design and installation for businesses.", 
             icon: "fas fa-network-wired",
             image: "images/images4.jpg",
-            price: 55000,
             tag: null
         },
         { 
@@ -1117,7 +1109,6 @@
             desc: "Automated lighting, climate control, and smart home solutions for comfort and security.", 
             icon: "fas fa-microchip",
             image: "images/images5.jpg",
-            price: 40000,
             tag: "Smart"
         },
         { 
@@ -1125,12 +1116,11 @@
             desc: "Renewable energy solutions including solar panels, inverters, and energy management.", 
             icon: "fas fa-solar-panel",
             image: "images/images6.jpg",
-            price: 95000,
             tag: "Eco"
         }
     ];
 
-    // Shopping Cart
+    // Shopping Cart - No prices, just item counting
     let cart = [];
 
     function updateCartUI() {
@@ -1150,15 +1140,12 @@
 
         cartFooter.style.display = 'block';
         let html = '';
-        let total = 0;
         cart.forEach((item, index) => {
-            const subtotal = item.price * item.quantity;
-            total += subtotal;
             html += `
                 <div class="cart-item">
                     <div class="cart-item-info">
                         <div class="cart-item-name">${item.name}</div>
-                        <div class="cart-item-price">KES ${item.price.toLocaleString()}</div>
+                        <div class="cart-item-price">Inquiry</div>
                     </div>
                     <div class="cart-item-qty">
                         <button onclick="updateQuantity(${index}, -1)">-</button>
@@ -1170,7 +1157,7 @@
             `;
         });
         cartItems.innerHTML = html;
-        cartTotal.textContent = `KES ${total.toLocaleString()}`;
+        cartTotal.textContent = totalItems;
     }
 
     function updateQuantity(index, change) {
@@ -1200,7 +1187,7 @@
         }
         updateCartUI();
         saveCart();
-        showToast(`✅ ${service.name} added to cart!`);
+        showToast(`✅ ${service.name} added to inquiry list!`);
     }
 
     function saveCart() {
@@ -1229,9 +1216,8 @@
             showToast('⚠️ Your cart is empty!', 'error');
             return;
         }
-        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         const items = cart.map(item => `${item.name} x${item.quantity}`).join('\n');
-        const message = `Hello Cretech Systems! I'd like to inquire about:\n\n${items}\n\nTotal: KES ${total.toLocaleString()}\n\nPlease contact me for installation details.`;
+        const message = `Hello Cretech Systems! I'd like to inquire about:\n\n${items}\n\nPlease contact me for installation details and pricing.`;
         window.open(`https://wa.me/254724083199?text=${encodeURIComponent(message)}`, '_blank');
         showToast('📤 Inquiry sent via WhatsApp!');
     }
@@ -1301,15 +1287,14 @@
             </section>
             <section class="container"><h2 class="section-title">About Cretech</h2><p style="max-width:800px;margin:-20px auto 30px;text-align:center;background:rgba(255,255,255,0.7);padding:24px 32px;border-radius:24px;backdrop-filter:blur(4px);font-size:1.1rem;color:#374151;">Cretech Systems Limited is a forward-thinking security and technology solutions provider specializing in advanced facility protection systems, intelligent surveillance, smart automation, ICT networking, and solar energy solutions for modern environments.</p><div style="text-align:center;"><button class="btn-secondary" id="learnMoreBtn"><i class="fas fa-arrow-right"></i> Learn More</button></div></section>
             <section class="container"><h2 class="section-title">Our Core Services</h2><p class="section-subtitle">Professional security and automation solutions tailored to your needs</p><div class="grid">${serviceData.map((s, index) => `
-                <div class="service-card" onclick="addToCart({id:${index}, name:'${s.name}', price:${s.price}})">
+                <div class="service-card" onclick="addToCart({id:${index}, name:'${s.name}'})">
                     ${s.tag ? `<span class="service-tag">${s.tag}</span>` : ''}
                     <div class="service-image">
                         <img src="${s.image}" alt="${s.name}" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\\'${s.icon}\\' style=\\'font-size:3.5rem;color:#3B82F6;\\'></i>'">
                     </div>
                     <h3 style="font-size:1.2rem;">${s.name}</h3>
                     <p style="font-size:0.9rem;color:#6B7280;">${s.desc}</p>
-                    <div class="service-price">KES ${s.price.toLocaleString()}</div>
-                    <button class="btn-secondary add-to-cart" onclick="event.stopPropagation(); addToCart({id:${index}, name:'${s.name}', price:${s.price}})"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                    <button class="btn-secondary add-to-cart" onclick="event.stopPropagation(); addToCart({id:${index}, name:'${s.name}'})"><i class="fas fa-cart-plus"></i> Add to Inquiry</button>
                 </div>
             `).join('')}</div></section>
             <section class="container"><div class="two-col-grid"><div><h2 class="section-title" style="text-align:left;font-size:2rem;">Why Choose Us</h2><ul class="feature-list"><li><i class="fas fa-check-circle"></i> Integrated physical & digital security</li><li><i class="fas fa-check-circle"></i> Experienced engineers & certified techs</li><li><i class="fas fa-check-circle"></i> International standards compliance</li><li><i class="fas fa-check-circle"></i> 24/7 support & maintenance</li></ul></div><div><h2 class="section-title" style="text-align:left;font-size:2rem;">Industries We Serve</h2><ul class="feature-list"><li><i class="fas fa-building"></i> Residential Estates</li><li><i class="fas fa-building"></i> Commercial Offices</li><li><i class="fas fa-building"></i> Industrial Facilities</li><li><i class="fas fa-building"></i> Government & Embassies</li><li><i class="fas fa-building"></i> Hospitals & Schools</li><li><i class="fas fa-building"></i> Hotels, Malls & Public Spaces</li><li><i class="fas fa-building"></i> Transport Hubs</li></ul></div></div></section>
@@ -1319,13 +1304,12 @@
     }
     function renderAbout() { return `<section class="container"><h2 class="section-title">Company Overview</h2><p style="font-size:1.1rem;text-align:center;max-width:860px;margin:-10px auto 40px;background:rgba(255,255,255,0.7);padding:24px 32px;border-radius:24px;backdrop-filter:blur(4px);">Cretech Systems Limited is a forward-thinking security and technology solutions provider specializing in advanced facility protection systems, intelligent surveillance, smart automation, ICT networking, and solar energy solutions for modern environments.</p><div class="two-col-grid"><div style="background:rgba(248,250,254,0.85);backdrop-filter:blur(8px);padding:36px;border-radius:28px;border:1px solid rgba(255,255,255,0.3);"><div style="background:linear-gradient(135deg,#3B82F6,#8B5CF6);width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;"><i class="fas fa-bullseye" style="font-size:1.5rem;color:white;"></i></div><h3 style="margin:0 0 12px;">Our Mission</h3><p style="color:#4B5563;">To deliver superior physical and digital security systems through professional engineering, modern technology, and customer-centric service.</p></div><div style="background:rgba(248,250,254,0.85);backdrop-filter:blur(8px);padding:36px;border-radius:28px;border:1px solid rgba(255,255,255,0.3);"><div style="background:linear-gradient(135deg,#8B5CF6,#3B82F6);width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;"><i class="fas fa-eye" style="font-size:1.5rem;color:white;"></i></div><h3 style="margin:0 0 12px;">Our Vision</h3><p style="color:#4B5563;">To be the leading provider of innovative, dependable, and fully integrated security solutions that safeguard facilities and empower safer communities.</p></div></div><div style="margin-top:48px;text-align:center;background:rgba(255,255,255,0.7);padding:40px;border-radius:28px;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.3);"><h3 style="margin-bottom:20px;font-size:1.5rem;">Core Values</h3><div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;">${['Trust & Integrity','Innovation & Excellence','Customer-Centric Service','Professionalism & Reliability'].map(v => `<span style="background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.1);border-radius:50px;padding:10px 22px;display:inline-block;font-weight:600;color:#1E293B;"><i class="fas fa-star" style="color:#3B82F6;margin-right:8px;"></i>${v}</span>`).join('')}</div></div></section>`; }
     function renderServices() { return `<div class="container"><h2 class="section-title">Our Expertise</h2><p class="section-subtitle">Explore our comprehensive range of security and automation solutions</p><div class="grid">${serviceData.map((s, index) => `
-        <div class="service-card" onclick="addToCart({id:${index}, name:'${s.name}', price:${s.price}})">
+        <div class="service-card" onclick="addToCart({id:${index}, name:'${s.name}'})">
             ${s.tag ? `<span class="service-tag">${s.tag}</span>` : ''}
             <div class="service-image"><img src="${s.image}" alt="${s.name}" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\\'${s.icon}\\' style=\\'font-size:3.5rem;color:#3B82F6;\\'></i>'"></div>
             <h3 style="font-size:1.2rem;">${s.name}</h3>
             <p style="font-size:0.9rem;color:#6B7280;">${s.desc}</p>
-            <div class="service-price">KES ${s.price.toLocaleString()}</div>
-            <button class="btn-secondary add-to-cart" onclick="event.stopPropagation(); addToCart({id:${index}, name:'${s.name}', price:${s.price}})"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+            <button class="btn-secondary add-to-cart" onclick="event.stopPropagation(); addToCart({id:${index}, name:'${s.name}'})"><i class="fas fa-cart-plus"></i> Add to Inquiry</button>
         </div>
     `).join('')}</div></div>`; }
     function renderIndustries() { return `<div class="container"><h2 class="section-title">Industries We Serve</h2><p class="section-subtitle">Tailored security and automation solutions for every sector</p><div class="grid">${['Residential Estates','Commercial Offices','Industrial Facilities','Government & Embassies','Hospitals & Schools','Hotels, Malls & Public Spaces','Transport Hubs'].map(ind => `<div class="industry-card"><i class="fas fa-industry"></i><h3 style="font-size:1.3rem;margin:8px 0;">${ind}</h3><p style="color:#6B7280;font-size:0.95rem;">Custom security & automation for ${ind.toLowerCase()} environments.</p></div>`).join('')}</div></div>`; }
